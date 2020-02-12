@@ -1,0 +1,34 @@
+<div class="card m-3">
+    <h5 class="card-header">Posts
+        <button type="button" class="btn btn-primary float-right" (click)="AddNewPost()">Add New Post</button>
+    </h5>
+    <div class="card-body">
+        <div style="text-align: right">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Global Filter"
+                (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+        <br />
+        <p-table #dt [value]="PostList" [paginator]="true" [rows]="10" [globalFilterFields]="['Subject','Description']">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-post let-ri="rowIndex">
+                <tr>
+                    <td>{{post.Subject}}</td>
+                    <td>{{post.Description}}</td>
+                    <td>
+                        <button type="button" class="ui-button-info" (click)="EditPost(post.id)"><i
+                                class="pi pi-pencil"></i></button>
+                        <button type="button" class="ui-button-info" (click)="DeletePost(post.id)"><i
+                                class="pi pi-trash"></i></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
